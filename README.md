@@ -104,7 +104,7 @@ WHERE
 	Listed_in LIKE '%Documentaries%'
 ```
 
-### Method 2: - Using the normalized tables
+#### Method 2: - Using the normalized tables
 ```sql
 SELECT 
 	ntc.*, 
@@ -119,7 +119,7 @@ WHERE
 **Objective:** Identify the movies that are documentaries
 
 ### 7. Find All Content Without a Director. Note In Director column Null was replaced with NA
-### Method 1:
+#### Method 1:
 ```sql
 SELECT 
 	* 
@@ -127,7 +127,7 @@ FROM
 	netflix_titlesCopy
 WHERE director ='NA'
 ```
-### Method 2:
+#### Method 2:
 ```sql
 SELECT 
 	ntc.*, 
@@ -142,7 +142,7 @@ WHERE
 **Objective:** Identify the content without Director(s)
 
 ### 8.	Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
-### Method 1:
+#### Method 1:
 ```sql
  SELECT 
 	* 
@@ -153,7 +153,7 @@ FROM
 	AND cast LIKE '%Salman Khan%' 
 	AND release_year > YEAR(GetDate()) - 10
 ```
-### Method 2: For normalized Cast table
+#### Method 2: For normalized Cast table
  ```sql
 SELECT 
 	ntc.*, 
