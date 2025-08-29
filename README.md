@@ -186,3 +186,25 @@ Order BY
 ```
 **Objective:** Identify The Top 10 Actors who have appeared in the highest number of Movies produced in India
 
+### 10.	Categorize the content based on the presence of the keyword 'kill' and 'violence' in the description field. 
+### Label content containing these keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
+ 
+```sql 
+SELECT 
+	Category,
+	Count(*) As CountContent
+FROM
+	(
+		SELECT 
+			CASE 
+				WHEN description LIKE '%kill%' OR description LIKE '%violence%' THEN 'Bad'
+			ELSE
+				'Good'
+			END AS Category 
+		FROM netflix_titlesCopy
+	) AS Categorised_Content
+	Group BY 
+		Category     
+```
+
+**Objectives:** Identify productions that contain the words 'kill' and 'violence' and label them as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
