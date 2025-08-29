@@ -130,12 +130,12 @@ WHERE director ='NA'
 ### Method 2:
 ```sql
 SELECT 
-	ntf.*, 
+	ntc.*, 
 	nd.director 
 FROM 
-	netflix_titlesCopy ntf
+	netflix_titlesCopy ntc
 JOIN 
-	netflix_director nd ON ntf.show_id = nd.show_id
+	netflix_director nd ON ntc.show_id = nd.show_id
 WHERE 
 	nd.director = 'NA'
 ```
@@ -156,16 +156,13 @@ FROM
 ### Method 2: For normalized Cast table
  ```sql
 SELECT 
-	ntf.*, 
+	ntc.*, 
 	nc.cast 
 FROM 
-	netflix_titlesCopy ntf
+	netflix_titlesCopy ntc
 JOIN 
-	netflix_cast nc ON ntf.show_id = nc.show_id
-WHERE
-	nc.cast= 'Salman Khan' 
-AND
-	ntf.release_year > YEAR(GetDate()) - 10
-
+	netflix_cast nc ON ntc.show_id = nc.show_id
+WHERE nc.cast= 'Salman Khan' 
+AND  ntc.release_year > YEAR(GetDate()) - 10
 ```
 **Objective:** Identify How Many Movies Actor 'Salman Khan' featured in the Last 10 Years
