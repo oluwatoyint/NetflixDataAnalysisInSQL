@@ -207,3 +207,33 @@ FROM
 ```
 
 **Objectives:** Identify productions that contain the words 'kill' and 'violence' and label them as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
+
+### 11.	Identify the Longest Movie
+**Example:** This example is to illustrate What 'value' signifies when using string_split
+```sql
+SELECT 
+	value from string_split('113 min',' ')
+```
+**Result:** The result is 113 since the delimiter here is space
+****Solution to Question 11:*
+```sql
+SELECT 
+    value 
+FROM 
+    STRING_SPLIT('113 min', ' ')
+
+SELECT TOP (1)
+    Type,
+    Title,
+    value AS TotalMinute,
+    duration
+FROM 
+    netflix_titlesCopy
+CROSS APPLY 
+    STRING_SPLIT(duration, ' ', 1)
+WHERE 
+    type = 'Movie' 
+    AND ordinal = 1
+ORDER BY 
+    CAST(TRIM(value) AS INT) DESC
+```
