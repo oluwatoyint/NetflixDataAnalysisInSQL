@@ -186,8 +186,7 @@ Order BY
 ```
 **Objective:** Identify The Top 10 Actors who have appeared in the highest number of Movies produced in India
 
-### 10.	Categorize the content based on the presence of the keyword 'kill' and 'violence' in the description field. 
-### Label content containing these keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
+### 10.	Categorize the content based on the presence of the keyword 'kill' and 'violence' in the description field. Label content containing these keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
  
 ```sql 
 SELECT 
