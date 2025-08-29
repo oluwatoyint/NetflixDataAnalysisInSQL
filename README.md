@@ -20,7 +20,7 @@ Though the dataset for this project is sourced from the Kaggle dataset, but its 
 ## Business Problems and Solutions
  
 ### 1. Display the total Number of Movies vs TV Shows
-```
+```sql
 SELECT 
 	type,
 	COUNT(*) count_type
@@ -32,7 +32,7 @@ GROUP BY
 **Objective:** Determine the distribution of content types on Netflix
 
 ### 2. 	Count the Number of Content Items in Each Genre
-```
+```sql
 SELECT 
 	Trim(Value) AS genre,  
 	COUNT(*) AS total_content  
@@ -46,7 +46,7 @@ GROUP BY
 **Objective:** Count the number of content items in each genre.
 
 ### 3.	List All Movies Released in a 2020
-```
+```sql
 SELECT
 	*
 FROM
@@ -58,7 +58,7 @@ WHERE
 **Objective:** Retrieve all movies released in a specific year.
 
 ### 4.	Find the Top 5 Countries with the Most Content on Netflix
-```
+```sql
 SELECT Top(5) 
 	* 
 FROM
@@ -82,7 +82,7 @@ ORDER BY
 **Objective:** Identify the top 5 countries with the highest number of content items.
 
 ### 5.	Find Content Added in the Last 5 Years
-```
+```sql
 SELECT 
 	* 
 FROM 
@@ -94,7 +94,7 @@ WHERE
 
 ### 6.	 All Movies that are Documentaries 
 ### Method 1:
-```
+```sql
 SELECT
 	* 
 FROM 
@@ -105,7 +105,7 @@ WHERE
 ```
 
 ### Method 2: - Using the normalized tables
-```
+```sql
 SELECT 
 	ntc.*, 
 	nli.listed_in 
@@ -117,3 +117,55 @@ WHERE
 	nli.Listed_in = 'Documentaries'
 ```
 **Objective:** Identify the movies that are documentaries
+
+### 7. Find All Content Without a Director. Note In Director column Null was replaced with NA
+### Method 1:
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE director ='NA'
+```
+### Method 2:
+```sql
+SELECT 
+	ntf.*, 
+	nd.director 
+FROM 
+	netflix_titlesCopy ntf
+JOIN 
+	netflix_director nd ON ntf.show_id = nd.show_id
+WHERE 
+	nd.director = 'NA'
+```
+**Objective:** Identify the content without Director(s)
+
+### 8.	Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
+### Method 1:
+```sql
+ SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+ WHERE 
+	Type='Movie' 
+	AND cast LIKE '%Salman Khan%' 
+	AND release_year > YEAR(GetDate()) - 10
+```
+### Method 2: For normalized Cast table
+ ```sql
+SELECT 
+	ntf.*, 
+	nc.cast 
+FROM 
+	netflix_titlesCopy ntf
+JOIN 
+	netflix_cast nc ON ntf.show_id = nc.show_id
+WHERE
+	nc.cast= 'Salman Khan' 
+AND
+	ntf.release_year > YEAR(GetDate()) - 10
+
+```
+**Objective:** Identify How Many Movies Actor 'Salman Khan' featured in the Last 10 Years
