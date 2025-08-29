@@ -56,3 +56,27 @@ WHERE
 	AND Release_Year = 2020
 ```
 **Objective:** Retrieve all movies released in a specific year.
+
+### 4.	Find the Top 5 Countries with the Most Content on Netflix
+```
+SELECT Top(5) 
+	* 
+FROM
+	(
+		SELECT 
+		Trim(Value) AS country,  
+		COUNT(*) AS total_content  
+		FROM 
+  			netflix_titles
+		CROSS APPLY 
+  			string_split (country, ',') 
+		GROUP BY 
+  			Trim(Value)
+
+		) AS temp
+WHERE
+	country IS NOT NULL
+ORDER BY 
+	total_content DESC
+```
+**Objective:** Identify the top 5 countries with the highest number of content items.
