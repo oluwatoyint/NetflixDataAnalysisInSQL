@@ -209,13 +209,13 @@ FROM
 **Objectives:** Identify productions that contain the words 'kill' and 'violence' and label them as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
 
 ### 11.	Identify the Longest Movie
-**Example:** This example is to illustrate What 'value' signifies when using string_split
+#### Example: This example is to illustrate what 'value' signifies when using string_split
 ```sql
 SELECT 
 	value from string_split('113 min',' ')
 ```
 **Result:** The content of value is 113 since the delimiter here is space.
-### Solution to Question 11:
+#### Solution to Question 11:
 ```sql
 SELECT TOP (1)
     Type,
@@ -231,4 +231,52 @@ WHERE
     AND ordinal = 1
 ORDER BY 
     CAST(TRIM(value) AS INT) DESC
+```
+**Objective:** To Identify record with the longest movie duration.
+
+### 12.	Find All Movies/TV Shows by Director 'Rajiv Chilaka'
+#### Solution Stage 1: The first we need to do is to normalize the table netflix_TitlesCopy and create Director Table 
+```sql
+SELECT 
+	show_id, 
+	TRIM(value) as director
+INTO 
+	netflix_director
+FROM 
+	netflix_titlesCopy
+CROSS APPLY 
+	string_split(director,',')
+```
+#### Method 1 Using LIKE on the unnormalized table and IN
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	Type IN ('Movie', 'TV Show') 
+	AND Director LIKE '%Rajiv Chilaka%'
+```
+#### Method 2
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	Director LIKE '%Rajiv Chilaka%'
+```
+### Method 3 Using JOIN to connect the netflix_titlesCopy table with the netflix_director table obtained by using CROSS APPLY and 
+
+string_split function
+```sql
+SELECT 
+	ntf.*, 
+	nd.director 
+FROM 
+	netflix_titlesCopy ntf
+JOIN 
+	netflix_director nd ON ntf.show_id = nd.show_id
+WHERE 
+	nd.Director = 'Rajiv Chilaka'
 ```
