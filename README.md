@@ -107,12 +107,12 @@ WHERE
 ### Method 2: - Using the normalized tables
 ```
 SELECT 
-	ntf.*, 
+	ntc.*, 
 	nli.listed_in 
 FROM 
-	netflix_titlesCopy ntf
+	netflix_titlesCopy ntc
 JOIN 
-	netflix_listed_in nli ON ntf.show_id = nli.show_id
+	netflix_listed_in nli ON ntc.show_id = nli.show_id
 WHERE 
 	nli.Listed_in = 'Documentaries'
 ```
