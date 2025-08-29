@@ -214,8 +214,7 @@ FROM
 SELECT 
 	value from string_split('113 min',' ')
 ```
-**Result:** The result is 113 since the delimiter here is space
-
+**Result:** The content of value is 113 since the delimiter here is space.
 ****Solution to Question 11:****
 ```sql
 SELECT TOP (1)
