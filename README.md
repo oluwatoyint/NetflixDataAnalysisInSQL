@@ -93,7 +93,7 @@ WHERE
 **Objective:** Identify Content added to data in the last 5 years
 
 ### 6.	 All Movies that are Documentaries 
-### Method 1:
+## Method 1:
 ```sql
 SELECT
 	* 
