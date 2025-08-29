@@ -215,7 +215,7 @@ SELECT
 	value from string_split('113 min',' ')
 ```
 **Result:** The content of value is 113 since the delimiter here is space.
-****Solution to Question 11:****
+## Solution to Question 11:##
 ```sql
 SELECT TOP (1)
     Type,
