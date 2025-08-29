@@ -80,3 +80,14 @@ ORDER BY
 	total_content DESC
 ```
 **Objective:** Identify the top 5 countries with the highest number of content items.
+
+### 5.	Find Content Added in the Last 5 Years
+```
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	date_added >= DATEADD(Year, -5, GetDate())
+```
+**Objective:** Identify Content added to data in the last 5 years
