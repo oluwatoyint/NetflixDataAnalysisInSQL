@@ -91,3 +91,29 @@ WHERE
 	date_added >= DATEADD(Year, -5, GetDate())
 ```
 **Objective:** Identify Content added to data in the last 5 years
+
+### 6.	 All Movies that are Documentaries 
+### Method 1:
+```
+SELECT
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	Type='Movie' AND 
+	Listed_in LIKE '%Documentaries%'
+```
+
+### Method 2: - Using the normalized tables
+```
+SELECT 
+	ntf.*, 
+	nli.listed_in 
+FROM 
+	netflix_titlesCopy ntf
+JOIN 
+	netflix_listed_in nli ON ntf.show_id = nli.show_id
+WHERE 
+	nli.Listed_in = 'Documentaries'
+```
+**Objective:** Identify the movies that are documentaries
