@@ -28,4 +28,5 @@ FROM
 	  netflix_titles
 GROUP BY 
   	type
+---
 **Objective:** Determine the distribution of content types on Netflix
