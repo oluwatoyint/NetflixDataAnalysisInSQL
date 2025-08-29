@@ -218,11 +218,6 @@ SELECT
 
 ****Solution to Question 11:****
 ```sql
-SELECT 
-    value 
-FROM 
-    STRING_SPLIT('113 min', ' ')
-
 SELECT TOP (1)
     Type,
     Title,
