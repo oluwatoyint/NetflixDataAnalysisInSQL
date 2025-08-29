@@ -104,7 +104,7 @@ WHERE
 	Listed_in LIKE '%Documentaries%'
 ```
 
-#### Method 2: - Using the normalized tables
+#### Method 2: Using the normalized tables
 ```sql
 SELECT 
 	ntc.*, 
