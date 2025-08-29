@@ -21,7 +21,7 @@ Though the dataset for this project is sourced from the Kaggle dataset, but its 
  
 ### 1. Display the total Number of Movies vs TV Shows
 --- 
-  sql
+  
 SELECT 
 	  type,
 	  COUNT(*) count_type
