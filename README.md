@@ -235,7 +235,7 @@ ORDER BY
 **Objective:** To Identify record with the longest movie duration.
 
 ### 12.	Find All Movies/TV Shows by Director 'Rajiv Chilaka'
-#### Solution Stage 1: The first we need to do is to normalize the table netflix_TitlesCopy and create Director Table 
+#### Solution Stage 1: The first thing we need to do is to normalize the table netflix_TitlesCopy and create Director Table 
 ```sql
 SELECT 
 	show_id, 
@@ -247,7 +247,7 @@ FROM
 CROSS APPLY 
 	string_split(director,',')
 ```
-#### Method 1 Using LIKE on the unnormalized table and IN
+#### Method 1: Using LIKE on the unnormalized table and IN
 ```sql
 SELECT 
 	* 
@@ -257,7 +257,7 @@ WHERE
 	Type IN ('Movie', 'TV Show') 
 	AND Director LIKE '%Rajiv Chilaka%'
 ```
-#### Method 2
+#### Method 2:
 ```sql
 SELECT 
 	* 
@@ -266,7 +266,7 @@ FROM
 WHERE 
 	Director LIKE '%Rajiv Chilaka%'
 ```
-### Method 3 Using JOIN to connect the netflix_titlesCopy table with the netflix_director table obtained by using CROSS APPLY and 
+#### Method 3: Using JOIN to connect the netflix_titlesCopy table with the netflix_director table obtained by using CROSS APPLY and 
 
 string_split function
 ```sql
