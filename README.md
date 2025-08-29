@@ -166,3 +166,23 @@ WHERE nc.cast= 'Salman Khan'
 AND  ntc.release_year > YEAR(GetDate()) - 10
 ```
 **Objective:** Identify How Many Movies Actor 'Salman Khan' featured in the Last 10 Years
+
+### 9.	Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
+```sql
+SELECT TOP(10)
+	Trim(Value) AS Actor,
+	COUNT(*) HighestNumber
+FROM 
+	netflix_titles
+CROSS APPLY 
+	STRING_SPLIT(cast,',')
+WHERE 
+	country LIKE '%India%' 
+	AND type = 'Movie'
+GROUP BY 
+	Trim(Value)
+Order BY 
+	COUNT(*) DESC
+```
+**Objective:** Identify The Top 10 Actors who have appeared in the highest number of Movies produced in India
+
