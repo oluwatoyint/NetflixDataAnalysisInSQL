@@ -98,8 +98,81 @@ FROM
 	netflix_titlesCopy   
 ```
 **Objective:** To identify the original total number of records in the dataset we imported. Here we see it is 8807
+### Stage 4: Check for and replace all Null values in the columns of the table netflix_copy with 'NA' (Not Available)
+```sql
+UPDATE 
+	netflix_titlesCopy
+SET 
+	type='NA' 
+WHERE type Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	title='NA' 
+WHERE title Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	director='NA' 
+WHERE director Is Null
 
 
+UPDATE 
+	netflix_titlesCopy
+SET 
+	cast='NA' 
+WHERE cast Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	country='NA' 
+WHERE country Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	date_added='NA' 
+WHERE date_added Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	release_year='NA' 
+WHERE release_year Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	rating = 'NA' 
+WHERE rating Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	duration = 'NA' 
+WHERE duration Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	listed_in = 'NA' 
+WHERE listed_in Is Null
+
+UPDATE 
+	netflix_titlesCopy
+SET 
+	description = 'NA' 
+WHERE description Is Null
+```
+**Objective:** To make the table easier to view by identifying and  replacing Null values with 'NA'
+### Stage 5: We begin to run several SQL queries to check for duplicate records
+```sql
+SELECT DISTINCT [type] FROM netflix_titlesCopy
+```
+**Objective:** To identify if the original total number of records in the dataset we imported. Here we see it is 8807
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
