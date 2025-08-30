@@ -12,13 +12,24 @@ This project requires a thorough examination of Netflix's movie and TV show data
 - Organise and analyse content by release year, country, and duration.
 - Analyse and categorise information using precise criteria and keywords.
  
-## Dataset
+## Dataset Sourcing & Cleaning
  
 Though the dataset for this project is sourced from the <a href ='https://www.kaggle.com/datasets'>Kaggle</a> datasets website, but its uploaded here: Netflix_titles.csv
- 
- 
+The first thing we want to do after the data is downloaded as a csv (flat file) is to import it into Microsoft SQL Server. You must have installed your Microsoft SQL Server 2022 and the Microsoft SQL Server Management Studio 21. 
+
+## Importing the dataset into Microsoft SQL Server 
+#### Step 1
+Launch your Microsoft SQL Server Management Studio 21 and create a database called Movies
+Select New Query from the menu bar and type the sql statement below, after which you click the Execute button on the Menu bar:
+```sql
+CREATE DATABASE Movies
+```
+**Objective:** Create the Movies database that will contain the netflix table
+#### Step 2
+In Microsoft SQL Server Managment Studio right click on the Movies database, select Tasks and Import Flat File from the menus.
+Click on Next. In the wi
 ## Business Problems and Solutions
- 
+  
 ### 1. Display the total Number of Movies vs TV Shows
 ```sql
 SELECT 
