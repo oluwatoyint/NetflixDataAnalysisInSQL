@@ -27,7 +27,13 @@ CREATE DATABASE Movies
 **Objective:** Create the Movies database that will contain the netflix table
 #### Step 2
 In Microsoft SQL Server Managment Studio right click on the Movies database, select Tasks and Import Flat File from the menus.
-Click on Next. In the wi
+Click on Next. 
+Then select the netflix.csv file from the location on your computer, give it a table name netflix_titles
+Click on Next.
+Then preview Click on Next and then we get to the Modify Columns window
+#### Step 3: Ensuring that the data is imported without any errors
+To do this we make sure all the table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.
+So do that
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
