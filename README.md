@@ -62,7 +62,7 @@ FROM
 
 ![Maximum Column Size](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/maximumcolumns.png)
 
-### Dataset Cleaning: Make a duplicate copy of the netflix_titles named netflix_titlesCopy by using the SQL statements below. It is the professional best practise to first make a duplicate copy of dataset to be analysed.
+### Dataset Cleaning: Make a duplicate copy of the netflix_titles named netflix_titlesCopy by using the SQL statements below. 
 
 ```sql
 SELECT
@@ -72,6 +72,7 @@ INTO
 FROM
 	netflix_titles
 ```
+**Objective:** To avoid fatal errors like mistakenly deleting the dataset. It is the professional best practise to first make a duplicate copy of dataset to be analysed.
 
 ## Business Problems and Solutions
   
