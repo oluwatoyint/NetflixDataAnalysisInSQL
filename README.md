@@ -33,6 +33,8 @@ Click on Next.
 Then preview Click on Next and then we get to the Modify Columns window
 #### Step 3: Ensuring that the data is imported without any errors
 To do this we make sure all the table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.
+Click on next and finish the import.
+
 ![Modify Column](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Modify.png)
 ## Business Problems and Solutions
   
