@@ -83,9 +83,17 @@ PRIMARY KEY (show_id)
 ```
 **Objective:** To begin to find duplicates we have to create a primary key for the table. We have chose show_id column because it has no Null values.
 ### Stage 3: We do a record count, and take note of the total number of records
+#### Method 1:
 ```sql
 SELECT
 	*
+FROM
+	netflix_titlesCopy   
+```
+#### Method 2:
+```sql
+SELECT
+	COUNT(*)
 FROM
 	netflix_titlesCopy   
 ```
