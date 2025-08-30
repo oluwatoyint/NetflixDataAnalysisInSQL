@@ -171,7 +171,39 @@ WHERE description Is Null
 ```sql
 SELECT DISTINCT [type] FROM netflix_titlesCopy
 ```
-**Objective:** To identify if the original total number of records in the dataset we imported. Here we see it is 8807
+**Objective:** Identifying if there is are duplicate types or film
+#### Checking for duplicate show_id
+```sql
+SELECT 
+    Show_id,
+	COUNT(*) duplicate_count
+FROM 
+    netflix_titlesCopy 
+GROUP BY 
+		show_id
+HAVING COUNT(*)>1
+```
+**Objective:** To identify duplicate show_id. Here we see there are no duplicates show_id, which confirms that our choice of using it has a Primary Key was right. However it still does not prove that there are no duplicate records, we need to check for duplicate titles
+SELECT 
+	*	
+FROM 
+	netflix_titlesCopy
+WHERE title IN
+(
+	SELECT 
+		title
+	FROM
+		netflix_titlesCopy
+	GROUP BY
+		title
+	HAVING COUNT(*) > 1
+) 
+GROUP BY Title
+
+**Objective:** Identify duplicate titles and view the records. Here we see that there are duplicate titles, but their  types are different. We still need to check whether there are records with same type and same titles.
+
+
+
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
