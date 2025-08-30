@@ -244,7 +244,7 @@ DELETE FROM netflix_titlesCopy WHERE ID NOT IN
 )
 ```
 **Objective:** Create a Primary key column of integer type, to help using code above to remove the duplicates from the table and leave only distint title and type combinations.
-#### Method 3: Using DISTINCT function to select unique combination of title and type into a table called DistinctNetflixRecs. Droping netflix_titlesTest, and later rename DistinctNetflixRecs to netflix_titlesTest
+#### Method 3: Using DISTINCT function to select unique combination of title and type into a table called DistinctNetflixRecs. Droping netflix_titlesCopy, and later rename DistinctNetflixRecs to netflix_titlesCopy
 
 ```sql
 SELECT DISTINCT 
