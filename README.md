@@ -1,4 +1,4 @@
-# End To End Analysis For Netflix Dataset Using Microsoft SQL
+# End To End ETL Analysis For Netflix Dataset Using Microsoft SQL
 
 ![Netsoft Logo](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/NetflixLogo.png)
 
@@ -14,7 +14,7 @@ This project requires a thorough examination of Netflix's movie and TV show data
  
 ## Dataset Sourcing & Cleaning
  
-Though the dataset for this project is sourced from the <a href ='https://www.kaggle.com/datasets'>Kaggle</a> datasets website, but its uploaded here: Netflix_titles.csv
+Though the dataset for this project is sourced from the <a href ='https://www.kaggle.com/datasets/shivamb/netflix-shows'>Kaggle</a> datasets website, but its uploaded here: Netflix_titles.csv
 The first thing we want to do after the data is downloaded as a csv (flat file) is to import it into Microsoft SQL Server. You must have installed your Microsoft SQL Server 2022 and the Microsoft SQL Server Management Studio 21. 
 
 ## Importing the dataset into Microsoft SQL Server 
