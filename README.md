@@ -183,7 +183,8 @@ GROUP BY
 		show_id
 HAVING COUNT(*)>1
 ```
-**Objective:** To identify duplicate show_id. Here we see there are no duplicates show_id, which confirms that our choice of using it has a Primary Key was right. However it still does not prove that there are no duplicate records, we need to check for duplicate titles
+**Objective:** To identify duplicate show_id. Here we see there are no duplicates show_id, which confirms that our choice of using it has a Primary Key was right. However it still does not prove that there are no duplicate records, we need to check for duplicate titles.
+```sql
 SELECT 
 	*	
 FROM 
@@ -199,7 +200,7 @@ WHERE title IN
 	HAVING COUNT(*) > 1
 ) 
 GROUP BY Title
-
+```
 **Objective:** Identify duplicate titles and view the records. Here we see that there are duplicate titles, but their  types are different. We still need to check whether there are records with same type and same titles.
 
 
