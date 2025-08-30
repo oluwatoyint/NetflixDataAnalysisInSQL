@@ -62,7 +62,8 @@ FROM
 
 ![Maximum Column Size](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/maximumcolumns.png)
 
-### Dataset Cleaning: Make a duplicate copy of the netflix_titles named netflix_titlesCopy by using the SQL statements below. 
+## Dataset Cleaning
+### Stage 1: Make a duplicate copy of the netflix_titles named netflix_titlesCopy by using the SQL statements below. 
 
 ```sql
 SELECT
@@ -73,6 +74,23 @@ FROM
 	netflix_titles
 ```
 **Objective:** To avoid fatal errors like mistakenly deleting the dataset. It is the professional best practise to first make a duplicate copy of dataset to be analysed.
+### Stage 2: Create make the show_id column the Primary Key for the table
+```sql
+ALTER TABLE 
+	netflix_titlesCopy
+ADD CONSTRAINT pk_ntc
+PRIMARY KEY (show_id)
+```
+**Objective:** To begin to find duplicates we have to create a primary key for the table. We have chose show_id column because it has no Null values.
+### Stage 3: We do a record count, and take note of the total number of records
+```sql
+SELECT
+	*
+FROM
+	netflix_titlesCopy   
+```
+**Objective:** To identify the original total number of records in the dataset we imported. Here we see it is 8807
+
 
 ## Business Problems and Solutions
   
