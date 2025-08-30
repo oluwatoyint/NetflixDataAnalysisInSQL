@@ -36,6 +36,27 @@ To do this we make sure all the table columns have the datatype of nvarchar(MAX)
 Click on next and finish the import.
 
 ![Modify Column](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Modify.png)
+
+#### Step 4: We now run the SQL code below to identify the maximum column size for the content in each of the columns of the netflix_titles table imported. Select New Query and enter the SQL statements below execute
+```sql
+USE Movies
+ SELECT
+	MAX(LEN(show_id)) ShowID,
+	MAX(LEN(type)) type,
+	MAX(LEN(title)) title,
+	MAX(LEN(director))director,
+	MAX(LEN(cast)) cast,
+	MAX(LEN(country))country,
+	MAX(LEN(date_added)) date_added,
+	MAX(LEN(release_year)) release_year,
+	MAX(LEN(rating))rating,
+	MAX(LEN(duration))duration,
+	MAX(LEN(listed_in)) listed_in,
+	MAX(LEN(description))description
+FROM 
+	netflix_titles
+```
+**Objective:** To identifty the maximum column size in each of the columns of the netflix_titles table so we can remodify the datatype sizes of the column. This is for performance optimization.
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
