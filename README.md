@@ -58,7 +58,7 @@ FROM
 ```
 **Objective:** To identifty the maximum column size in each of the columns of the netflix_titles table so we can remodify the datatype sizes of the column. This is for performance optimization.
 
-**Result:** When you execute the code above the result gives the maximum column size of each column in the netflix_titles table which we see in the figure below. Right click on the table netflix_titles and select the design view. Then readjust all the sizes of the datatypes to the value we see in the result.
+**Result:** When you execute the code above the result gives the maximum column size of each column in the netflix_titles table which we see in the figure below. Right click on the table netflix_titles and select the design view. Using this view, readjust all the sizes of the datatypes to the value we see in the result.
 
 ![Maximum Column Size](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/maximumcolumns.png)
 
