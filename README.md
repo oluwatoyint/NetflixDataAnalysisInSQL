@@ -252,7 +252,10 @@ SELECT DISTINCT
 	type 
 INTO DistinctNetflixRecs
 FROM 
-	netflix_titlesCopyt
+	netflix_titlesCopy
+```
+```sql
+DROP TABLE netflix_titlesCopy
 ```
 ```sql
 EXEC sp_rename 'DistinctNetflixRecs', 'netflix_titlesCopy'
