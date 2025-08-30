@@ -266,9 +266,7 @@ FROM
 WHERE 
 	Director LIKE '%Rajiv Chilaka%'
 ```
-#### Method 3: Using JOIN to connect the netflix_titlesCopy table with the netflix_director table obtained by using CROSS APPLY and 
-
-string_split function
+#### Method 3: Using JOIN to connect the netflix_titlesCopy table with the netflix_director table obtained by using CROSS APPLY and string_split function
 ```sql
 SELECT 
 	ntf.*, 
@@ -280,3 +278,138 @@ JOIN
 WHERE 
 	nd.Director = 'Rajiv Chilaka'
 ```
+**Objective:** To Identify All Movies/TV Shows directed by Director 'Rajiv Chilaka'
+
+### 13.	List All TV Shows with More Than 5 Seasons
+```sql
+SELECT
+	Title,
+	TRIM(Value) Season
+FROM
+	netflix_titlesCopy
+CROSS APPLY 
+	string_split(duration,' ',1)
+WHERE 
+	type = 'TV Show' 
+	AND Ordinal = 1
+	AND TRY_CAST(TRIM(Value) AS INT) > 5
+Order By 
+	CAST(TRIM(Value) AS INT) DESC
+```
+**Objective:** To Identify and list all TV shows with more than 5 seasons.
+
+### 14.	List content items added after August 20, 2021
+#### Method 1:
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	CAST(date_added as Date) > '2021-08-20'
+```
+**Explanation:**
+- We do not need to do the above if the values in the date column were previously converted to the Date datatype
+- Use method 2 below if the date column values have already been formatted with the Date datatype
+#### Method 2:
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	date_added > '2021-08-20'
+```
+**Objective:** To Identify and list content items added after the date August 20, 2021
+### 15.	List movies added to on June 15, 2019
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	date_added = '2019-06-15' AND type='Movie'
+```
+**Objective:** To Identify and list movies added on June 15, 2019
+### 16.	List content items added in 2021
+#### Method 1:
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	date_added >= '2021-01-01' 
+	AND date_added <= '2021-12-31'
+``` 
+ #### Method 2:
+ ```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	date_added BETWEEN '2021-01-01' 
+	AND '2021-12-31'
+```  
+#### Method 3:
+```sql
+Select 
+	*  
+FROM 
+	netflix_titlesCopy
+WHERE 
+	date_added LIKE '%2021%'
+```
+#### Method 4:
+```sql
+SELECT 
+	*
+FROM
+	netflix_titlesCopy where Year(date_added) = 2021
+```
+**Objective:** To Identify content added in 2021
+### 17.	List movies added in 2021
+#### Method 1:
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	type = 'Movie' 
+	AND date_added >= '2021-01-01' 
+	AND date_added <= '2021-12-31'
+  ```
+#### Method 2:
+```sql
+SELECT 
+	* 
+FROM 
+	netflix_titlesCopy
+WHERE 
+	type = 'Movie' 
+	AND  date_added BETWEEN '2021-01-01' 
+	AND '2021-12-31'
+```
+#### Method 3:
+  ```sql
+SELECT 
+	*  
+ FROM 
+	netflix_titlesCopy
+ WHERE 
+	type = 'Movie' 
+	AND date_added LIKE '%2021%'
+```
+#### Method 4:
+```sql
+SELECT 
+	*
+FROM 
+	netflix_titlesCopy 
+WHERE 
+	Year(date_added) = 2021 
+	AND type='Movie'
+ ```
+**Objective:** To Identify and list movies added in 2021
