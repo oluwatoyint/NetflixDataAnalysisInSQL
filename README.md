@@ -118,7 +118,6 @@ SET
 	director='NA' 
 WHERE director Is Null
 
-
 UPDATE 
 	netflix_titlesCopy
 SET 
