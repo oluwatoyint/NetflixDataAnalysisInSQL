@@ -21,7 +21,9 @@ The first thing we want to do after the data is downloaded as a csv (flat file) 
 #### Step 1: Open the netflix_titles.csv file and preview it, inspect the column names. If any of the column names has an underscore try to modify the name, by removing the underscore for instance change show_id with showid, listed_in to listedin, and release_year to releaseyear
 
 ![InspectTable](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Preview.png)
+
 **Objective:** To preview the downloaded table netflix_titles.csv, identify and modify the column names if needed
+
 ![InspectTable](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Preview2.png)
 **Objective:** Preview the table netflix_titles.csv, to confirm the changed column names
 Select New Query from the menu bar and type the sql statement below, after which you click the Execute button on the Menu bar:
