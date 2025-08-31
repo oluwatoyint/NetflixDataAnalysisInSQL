@@ -25,13 +25,15 @@ The first thing we want to do after the data is downloaded as a csv (flat file) 
 **Objective:** To preview the downloaded table netflix_titles.csv, identify and modify the column names if needed
 
 ![InspectTable](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Preview2.png)
-**Objective:** Preview the table netflix_titles.csv, to confirm the changed column names
-Select New Query from the menu bar and type the sql statement below, after which you click the Execute button on the Menu bar:
+
+**Result:** View of the table netflix_titles.csv with the changed column names
+
+#### Step 2: Create the Movies database that will contain the netflix table
 ```sql
 CREATE DATABASE Movies
 ```
-**Objective:** Create the Movies database that will contain the netflix table
-#### Step 2
+**Result:** Movies database that will contain the netflix table created.
+
 In Microsoft SQL Server Managment Studio right click on the Movies database, select Tasks and Import Flat File from the menus.
 Click on Next. 
 Then select the netflix.csv file from the location on your computer, give it a table name netflix_titles
