@@ -15,11 +15,13 @@ This project requires a thorough examination of Netflix's movie and TV show data
 ## Dataset Sourcing & Cleaning
  
 Though the dataset for this project is sourced from the <a href ='https://www.kaggle.com/datasets/shivamb/netflix-shows'>Kaggle</a> datasets website, but its uploaded here: Netflix_titles.csv
-The first thing we want to do after the data is downloaded as a csv (flat file) is to import it into Microsoft SQL Server. You must have installed your Microsoft SQL Server 2022 and the Microsoft SQL Server Management Studio 21. 
+The first thing we want to do after the data is downloaded as a csv (flat file) is to open it your preferred SQL Editor. Then open it up to preview and take note of the column names
 
-## Importing the dataset into Microsoft SQL Server 
-#### Step 1
-Launch your Microsoft SQL Server Management Studio 21 and create a database called Movies
+## Importing the dataset into SQL
+#### Step 1: Open the netflix_titles.csv file and preview it, inspect the column names. If any of the column names has an underscore try to modify the name, by removing the underscore for instance change show_id with showid, listed_in to listedin, and release_year to releaseyear
+
+![InspectTable](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Modify.png)
+
 Select New Query from the menu bar and type the sql statement below, after which you click the Execute button on the Menu bar:
 ```sql
 CREATE DATABASE Movies
