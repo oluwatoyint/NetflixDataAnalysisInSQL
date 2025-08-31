@@ -34,18 +34,31 @@ CREATE DATABASE Movies
 ```
 **Result:** Movies database that will contain the netflix table created.
 
-In Microsoft SQL Server Managment Studio right click on the Movies database, select Tasks and Import Flat File from the menus.
-Click on Next. 
-Then select the netflix.csv file from the location on your computer, give it a table name netflix_titles
-Click on Next.
-Then preview Click on Next and then we get to the Modify Columns window
 #### Step 3: Ensuring that the data is imported without any errors
 To do this we make sure all the table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.
-Click on next and finish the import.
-
-![Modify Column](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Modify.png)
-
-#### Step 4: We now run the SQL code below to identify the maximum column size for the content in each of the columns of the netflix_titles table imported. Select New Query and enter the SQL statements below execute
+We will will then run the SQL statements below to create and populate a table netflix_content with the contents of downloaded file netflix_titles.csv. Please ensure that you take care to put into the statements the correct names of all the columns. 
+```sql
+)
+GO
+CREATE TABLE netflix_content
+(
+  showid nvarchar(MAX) NOT NULL,
+  type nvarchar(MAX) NULL,
+  title nvarchar(MAX) NULL,
+  director nvarchar(MAX) NULL,
+  cast nvarchar(MAX) NULL,
+  country nvarchar(MAX) NULL,
+   dateadded nvarchar(MAX) NULL,
+   releaseyear smallint NULL,
+  rating nvarchar(MAX) NULL,
+  duration nvarchar(MAX) NULL,
+   listedin nvarchar(MAX) NULL,
+  description nvarchar(MAX) NULL
+)
+GO
+```
+**Result:** The table netflix_content will be created, with the column names and all
+#### Step 4: We now run the SQL code below to identify the maximum column size for the content in  each of the columns of the netflix_titles table imported. Select New Query and enter the SQL statements below execute
 ```sql
 USE Movies
  SELECT
