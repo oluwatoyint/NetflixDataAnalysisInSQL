@@ -108,6 +108,22 @@ FROM
 **Result:** When you execute the code above the result gives the maximum column size of each column in the netflixContent.
 ![Maximum Column Size](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/maximumcolumns.png)
 
+#### Step 5: Using the results above we now alter the table netflixContent and change the datasizes of the columns.
+```sql
+ALTER TABLE NetflixContent ALTER COLUMN showid nvarchar(5) NOT NULL
+ALTER TABLE NetflixContent ALTER COLUMN type nvarchar(7) NULL
+ALTER TABLE NetflixContent ALTER COLUMN title nvarchar(104) NULL
+ALTER TABLE NetflixContent ALTER COLUMN director nvarchar(208) NULL
+ALTER TABLE NetflixContent ALTER COLUMN cast nvarchar(771) NULL
+ALTER TABLE NetflixContent ALTER COLUMN country nvarchar(123) NULL
+ALTER TABLE NetflixContent ALTER COLUMN dateadded nvarchar(19) NULL
+ALTER TABLE NetflixContent ALTER COLUMN releaseyear smallint NULL
+ALTER TABLE NetflixContent ALTER COLUMN rating nvarchar(8) NULL
+ALTER TABLE NetflixContent ALTER COLUMN duration nvarchar(10) NULL
+ALTER TABLE NetflixContent ALTER COLUMN listedin nvarchar(79) NULL
+ALTER TABLE NetflixContent ALTER COLUMN description nvarchar(250) NULL
+```
+
 ## Dataset Cleaning
 ### Stage 1: Make a duplicate copy of the netflix_titles named netflix_titlesCopy by using the SQL statements below. 
 
