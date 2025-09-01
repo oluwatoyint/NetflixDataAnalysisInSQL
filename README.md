@@ -125,15 +125,15 @@ ALTER TABLE NetflixContent ALTER COLUMN description nvarchar(250) NULL
 ```
 
 ## Dataset Cleaning
-### Stage 1: Make a duplicate copy of the netflix_titles named netflix_titlesCopy by using the SQL statements below. 
+### Stage 1: Make a duplicate copy of the netflixContent named netflixStaging by using the SQL statements below. 
 
 ```sql
 SELECT
 	*
 INTO
-	netflix_titlesCopy
+	netflixStaging
 FROM
-	netflix_titles
+	netflixContent
 ```
 **Objective:** To avoid fatal errors like mistakenly deleting the dataset. It is the professional best practise to first make a duplicate copy of dataset to be analysed.
 ### Stage 2: Create make the show_id column the Primary Key for the table
