@@ -301,31 +301,26 @@ ADD ID INT IDENTITY(1,1) NOT NULL;
 ALTER TABLE netflixStaging
 ADD CONSTRAINT PK_netflixStaging_ID PRIMARY KEY (ID)
 ```
-**Result:** We removed showid as the PRIMARY KEY, by dropping the constraint name associated with it. We then created a column ID with datatype of INT, that autoincrements by 1 starting from 1, and does not accept null values. Finally we made the column the new PRIMARY KET of the table.
+**Result:** We removed showid as the PRIMARY KEY, by dropping the constraint name associated with it. We then created a column ID with datatype of INT, that autoincreases by 1 starting from 1, and does not accept null values. Finally we made the column the new PRIMARY KET of the table.
 
 ```sql
-DELETE FROM netflix_titlesCopy WHERE ID NOT IN
+DELETE FROM netflixStaging WHERE ID NOT IN
 (
-	SELECT MIN(ID) FROM netflix_titlesCopy
+	SELECT MIN(ID) FROM netflixStaging
 	GROUP BY Title, Type
 )
 ```
-**Objective:** Create a Primary key column of integer type, to help using code above to remove the duplicates from the table and leave only distint title and type combinations.
-#### Method 3: Using DISTINCT function to select unique combination of title and type into a table called DistinctNetflixRecs. Droping netflix_titlesCopy, and later rename DistinctNetflixRecs to netflix_titlesCopy
+**Result:** All the duplicates from the table are deleted leaving only distint title and type combinations.
+
+#### Method 3: Using DISTINCT function to select unique combination of title and type into a table called DistinctNetflixStagingRecs. 
 
 ```sql
 SELECT DISTINCT 
 	title, 
 	type 
-INTO DistinctNetflixRecs
+INTO DistinctNetflixStagingRecs
 FROM 
-	netflix_titlesCopy
-```
-```sql
-DROP TABLE netflix_titlesCopy
-```
-```sql
-EXEC sp_rename 'DistinctNetflixRecs', 'netflix_titlesCopy'
+	netflixStaging
 ```
 **Objective:** Identifying and selecting distinct title and type from table netflix_titlesCopy and copying them into a table called DistinctNetflixRecs. The problem with this method is
 that only two columns are in the new table.
