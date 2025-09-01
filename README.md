@@ -38,6 +38,7 @@ CREATE DATABASE Movies
 To do this we make sure all the table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.Please ensure that you take care to put into the statements the correct spelling of the names of all the columns,from step 1.
 
  ```sql
+USE Movies
 )
 GO
 CREATE TABLE netflix_content
