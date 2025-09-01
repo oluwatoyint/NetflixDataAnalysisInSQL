@@ -18,7 +18,7 @@ Though the dataset for this project is sourced from the <a href ='https://www.ka
 The first thing we want to do after the data is downloaded as a csv (flat file) is to open it your preferred SQL Editor. Then open it up to preview and take note of the column names
 
 ## Importing the dataset into SQL
-#### Step 1: Open the netflix_titles.csv file and preview it, inspect the column names. If any of the column names has an underscore try to modify the name, by removing the underscore for instance change show_id with showid, listed_in to listedin, and release_year to releaseyear
+#### Step 1: Open the netflix_titles.csv file and preview it, inspect the column names. For this project I changed the column names of show_id with showid, listed_in with listedin, and release_year with releaseyear
 
 ![InspectTable](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/Preview.png)
 
