@@ -251,43 +251,58 @@ WHERE title IN
 		title
 	HAVING COUNT(*) > 1
 ) 
-
+ORDER BY title
 ```
-**Objective:** Identify duplicate titles and view the records. Here we see that there are duplicate titles, but their  types are different. We still need to check whether there are records with same type and same titles.
+**Objective:** Identify duplicate titles and view the records. Here we see that there are duplicate titles, however some have diferent types. We still need to check whether there are records with same type and same titles.
 
 ```sql
 SELECT 
 * 
-FROM netflix_titlesCopy
+FROM netflixStaging
 WHERE title in 
 (
 	SELECT title
-	FROM netflix_titlesCopy 
+	FROM netflixStaging
 	GROUP BY title, type
 	HAVING COUNT(*) > 1
 )
+ORDER BY title
 ```
 **Objective:**  Identifying Duplicates that have both same title, and type - further fine tuning the search for duplicates. We can see now that 3 films have same titles and types
 ### Stage 6: After the duplicates have been identified, the next tasks depends on the requirements of the client so may want them stored in another table or deleted. For this project we are deleting the duplicates. However in method 1 below we will demonstrate how to store them in a new table.
 #### Method 1: Creating a table to store the duplicate records.
 ```sql
-SELECT
-	* INTO DeleledNetflixRecs
+SELECT 
+	*
+INTO
+	DeleledNetflixStagingRecs
 FROM
-	netflix_titlesCopy
+	netflixStaging
 WHERE title in 
 (
 	SELECT
 		title
 	FROM
-		netflix_titlesCopy  
+		netflixStaging  
 	GROUP BY
 		title, type
 	HAVING COUNT(*) > 1
 )
 ```
 **Objective:**  Identifying the duplicates and moving them into a new table
-#### Method 2: Delete duplicates. To use this method we have to create a new column named ID, make it a PRIMARY KEY of datatype int and let it auto increase by 1 by setting 'Is Identity' to YES in Design view.
+#### Method 2: Delete duplicates. To use this method we have to create a new column named ID, make it a PRIMARY KEY of datatype int and let it auto increase by 1.
+```sql
+ALTER TABLE netflixStaging
+DROP CONSTRAINT [pk_ntc]
+
+ALTER TABLE netflixStaging
+ADD ID INT IDENTITY(1,1) NOT NULL;
+
+ALTER TABLE netflixStaging
+ADD CONSTRAINT PK_netflixStaging_ID PRIMARY KEY (ID)
+```
+**Result:** We removed showid as the PRIMARY KEY, by dropping the constraint name associated with it. We then created a column ID with datatype of INT, that autoincrements by 1 starting from 1, and does not accept null values. Finally we made the column the new PRIMARY KET of the table.
+
 ```sql
 DELETE FROM netflix_titlesCopy WHERE ID NOT IN
 (
