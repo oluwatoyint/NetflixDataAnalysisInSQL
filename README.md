@@ -159,7 +159,7 @@ SELECT
 FROM
 	netflixStaging
 ```
-**Objective:** To identify the original total number of records in the dataset we imported. Here we see it is 8807
+**Objective:** To determine the total number of records in the duplicate table netflixStaging. Here we see it is also 8807
 ### Stage 4: Check for and replace all Null values in the columns of the table netflixStaging with 'NA' (Not Available)
 ```sql
 UPDATE 
