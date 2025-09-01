@@ -377,8 +377,15 @@ CROSS APPLY string_split(director,',')
 ```
 **Result:** Tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn and netflixStaging_Cast are generated.
 ### Stage 8: Final cleaning, because we have normalized the table and the column showid is common to all the tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn, netflixStaging_Cast and netflixStaging. We do not need the columns listedin, directors, cast, and country in netflixStaging.
-#### Method 1: We use the code below if we want to select certain columns from a table into a temporary table and then drop the original table and later rename the temporary table with the name of original table
+#### Method 1: We use the code below if we want to select certain columns from a table into a temporary table and then drop the original table and later rename the temporary table with the name of original table. Note: We first make a copy of netflixStaging named netflixStagingCopy. We will call netflixStagingCopy the unnormalized table.
 ```sql
+SELECT
+	*
+INTO
+	netflixStagingCopy
+FROM
+	netflixStaging
+
  SELECT  
 	showid, type, title, dateadded, releaseyear, rating, duration, description
 INTO 
@@ -417,7 +424,7 @@ SELECT
 	Trim(Value) AS genre,  
 	COUNT(*) AS total_content  
 FROM
-	netflix_titles
+	netflixStaging
 CROSS APPLY
 	string_split (listed_in, ',') 
 GROUP BY
