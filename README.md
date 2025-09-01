@@ -376,7 +376,25 @@ CROSS APPLY string_split(director,',')
 
 ```
 **Result:** Tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn and netflixStaging_Cast are generated.
-
+### Stage 8: Final cleaning, because we have normalized the table and the column showid is common to all the tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn, netflixStaging_Cast and netflixStaging. We do not need the columns listedin, directors, cast, and country in netflixStaging.
+#### Method 1: We use the code below if we want to select certain columns from a table into a temporary table and then drop the original table and later rename the temporary table with the name of original table
+```sql
+ SELECT  
+	showid, type, title, dateadded, releaseyear, rating, duration, description
+INTO 
+	netflixStaging_temp
+FROM 
+	netflixStaging
+DROP TABLE netflixStaging
+EXEC sp_rename 'netflixStaging_temp', 'netflixStaging'
+```
+#### Method 2: Another way we can get rid of the unwanted columns is to delete them,to Drop columns by altering table
+```sql
+ ALTER TABLE netflixStaging DROP Column director
+ ALTER TABLE netflixStaging DROP Column country
+ ALTER TABLE netflixStaging DROP Column cast
+ ALTER TABLE netflixStaging DROP Column listed_in
+```
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
