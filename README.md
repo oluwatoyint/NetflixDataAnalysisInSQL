@@ -293,7 +293,7 @@ WHERE title in
 )
 ```
 **Objective:**  Identifying the duplicates and moving them into a new table
-#### Method 2: Delete duplicates. To use this method we have to create a new column named ID, make it a PRIMARY KEY of datatype int and let it auto increase by 1.
+#### Method 2: Delete duplicates. To use this method we have to create a new column named ID, make it a PRIMARY KEY of datatype int and let it auto increase by 1. For this project this is the recommended method.
 ```sql
 ALTER TABLE netflixStaging
 DROP CONSTRAINT [pk_ntc]
