@@ -136,10 +136,10 @@ FROM
 	netflixContent
 ```
 **Objective:** To avoid fatal errors like mistakenly deleting the dataset. It is the professional best practise to first make a duplicate copy of dataset to be analysed.
-### Stage 2: Create make the show_id column the Primary Key for the table
+### Stage 2: Create make the showid column the Primary Key for the table
 ```sql
 ALTER TABLE 
-	netflix_titlesCopy
+	netflixStaging
 ADD CONSTRAINT pk_ntc
 PRIMARY KEY (show_id)
 ```
@@ -150,80 +150,74 @@ PRIMARY KEY (show_id)
 SELECT
 	*
 FROM
-	netflix_titlesCopy   
+	netflixStaging
 ```
 #### Method 2:
 ```sql
 SELECT
 	COUNT(*)
 FROM
-	netflix_titlesCopy   
+	netflixStaging
 ```
 **Objective:** To identify the original total number of records in the dataset we imported. Here we see it is 8807
-### Stage 4: Check for and replace all Null values in the columns of the table netflix_copy with 'NA' (Not Available)
+### Stage 4: Check for and replace all Null values in the columns of the table netflixStaging with 'NA' (Not Available)
 ```sql
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	type='NA' 
 WHERE type Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	title='NA' 
 WHERE title Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	director='NA' 
 WHERE director Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	cast='NA' 
 WHERE cast Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	country='NA' 
 WHERE country Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
-	date_added='NA' 
-WHERE date_added Is Null
+	dateadded='NA' 
+WHERE dateadded Is Null
 
 UPDATE 
-	netflix_titlesCopy
-SET 
-	release_year='NA' 
-WHERE release_year Is Null
-
-UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	rating = 'NA' 
 WHERE rating Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	duration = 'NA' 
 WHERE duration Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
-	listed_in = 'NA' 
-WHERE listed_in Is Null
+	listedin = 'NA' 
+WHERE listedin Is Null
 
 UPDATE 
-	netflix_titlesCopy
+	netflixStaging
 SET 
 	description = 'NA' 
 WHERE description Is Null
