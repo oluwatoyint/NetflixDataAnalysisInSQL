@@ -261,9 +261,12 @@ SELECT
 FROM netflixStaging
 WHERE title in 
 (
-	SELECT title
-	FROM netflixStaging
-	GROUP BY title, type
+	SELECT
+		title
+	FROM
+		netflixStaging
+	GROUP BY
+		title, type
 	HAVING COUNT(*) > 1
 )
 ORDER BY title
@@ -324,6 +327,13 @@ FROM
 ```
 **Objective:** Identifying and selecting distinct title and type from table netflix_titlesCopy and copying them into a table called DistinctNetflixRecs. The problem with this method is
 that only two columns are in the new table.
+```sql
+SELECT
+	COUNT(*)
+FROM
+	netflixStaging
+```
+**Result:** We see that the count is 8801 which implies 6 records with same title and type have been deleted.
 
 ## Business Problems and Solutions
   
