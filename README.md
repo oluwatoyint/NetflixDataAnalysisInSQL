@@ -35,13 +35,13 @@ CREATE DATABASE Movies
 **Result:** Movies database that will contain the netflix table created.
 
 #### Step 3: Ensuring that the data is imported without any errors
-To do this we make sure all the table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.Please ensure that you take care to put into the statements the correct spelling of the names of all the columns,from step 1.
+To do this we will create table netflixContent and make sure all it's table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.Please ensure that you take care to put into the statements the correct spelling of the names of all the columns,from step 1.
 
  ```sql
 USE Movies
 )
 GO
-CREATE TABLE netflix_content
+CREATE TABLE netflixContent
 (
 	showid nvarchar(MAX) NOT NULL,
   	type nvarchar(MAX) NULL,
@@ -58,12 +58,12 @@ CREATE TABLE netflix_content
 )
 GO
 ```
-**Result:** The table netflix_content will be created, with the column names and datatypes and all allowing null values except for the column showid.
+**Result:** The table netflixContent will be created, with the column names and datatypes and all allowing null values except for the column showid.
 
-#### Step 4: We will will then run the SQL statements below to create and populate table netflix_content with the contents of downloaded file netflix_titles.csv. 
+#### Step 4: We will will then run the SQL statements below to create and populate table netflixContent with the contents of downloaded file netflix_titles.csv. 
  ```sql
 GO
-BULK INSERT NetflixContent
+BULK INSERT netflixContent
 FROM 'C:\temp\netflix_titles.csv'
 WITH (
 	FORMAT = 'CSV',
@@ -75,12 +75,12 @@ WITH (
 )
 Go
  ```
-**Result:** The table netflix_content will be populated with the all the records in the netflix_titles.csv file. To confirm this run the SELECT statement below.
+**Result:** The table netflixContent will be populated with the all the records in the netflix_titles.csv file. To confirm this run the SELECT statement below.
  ```sql
 SELECT
 	*
 FROM
-	netflix_content
+	netflixContent
  ```
 **Result:** The result is 8807 records. 
 #### Step 4: We now run the SQL code below to identify the maximum column size for the content in  each of the columns of the netflix_titles table imported. Select New Query and enter the SQL statements below execute
