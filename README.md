@@ -83,29 +83,29 @@ FROM
 	netflixContent
  ```
 **Result:** The result is 8807 records. 
-#### Step 4: We now run the SQL code below to identify the maximum column size for the content in  each of the columns of the netflix_titles table imported. Select New Query and enter the SQL statements below execute
+#### Step 4: We now run the SQL code below to identify the maximum column size for the content in  each of the columns of the netflix_titles table imported. Run the SQL statements below.
+
 ```sql
 USE Movies
  SELECT
-	MAX(LEN(show_id)) ShowID,
+	MAX(LEN(showid)) showid,
 	MAX(LEN(type)) type,
 	MAX(LEN(title)) title,
 	MAX(LEN(director))director,
 	MAX(LEN(cast)) cast,
 	MAX(LEN(country))country,
-	MAX(LEN(date_added)) date_added,
-	MAX(LEN(release_year)) release_year,
+	MAX(LEN(dateadded)) dateadded,
+	MAX(LEN(releaseyear)) releaseyear,
 	MAX(LEN(rating))rating,
 	MAX(LEN(duration))duration,
-	MAX(LEN(listed_in)) listed_in,
+	MAX(LEN(listedin)) listedin,
 	MAX(LEN(description))description
 FROM 
-	netflix_titles
+	netflixContent
 ```
-**Objective:** To identifty the maximum column size in each of the columns of the netflix_titles table so we can remodify the datatype sizes of the column. This is for performance optimization.
+**Objective:** To identifty the maximum column size in each of the columns of the netflixContent table so we can remodify the datatype sizes of the column. This is for performance optimization.
 
-**Result:** When you execute the code above the result gives the maximum column size of each column in the netflix_titles table which we see in the figure below. Right click on the table netflix_titles and select the design view. Using this view, readjust all the sizes of the datatypes to the value we see in the result.
-
+**Result:** When you execute the code above the result gives the maximum column size of each column in the netflixContent.
 ![Maximum Column Size](https://github.com/oluwatoyint/NetflixDataAnalysisInSQL/blob/main/maximumcolumns.png)
 
 ## Dataset Cleaning
