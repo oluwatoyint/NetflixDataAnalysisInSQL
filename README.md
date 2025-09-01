@@ -334,6 +334,20 @@ FROM
 	netflixStaging
 ```
 **Result:** We see that the count is 8801 which implies 6 records with same title and type have been deleted.
+#### Converting the dateadded column to Date datatype. We need to do this to answer some of the questions easier when we start the analysis.
+```sql
+ALTER TABLE netflixStaging 
+ADD temp_dateadded DATE NULL 
+
+UPDATE netflixStaging 
+SET temp_dateadded = TRY_CAST(dateadded AS DATE);
+
+ALTER TABLE netflixStaging 
+DROP COLUMN dateadded;
+
+EXEC sp_rename 'netflixStaging.temp_dateadded', 'dateadded', 'COLUMN';
+```
+**Result:** We used the process above because the dateadded column contains existing values
 
 ### Stage 7: Before we start analysing the content of the table. We need to normalize it. We can see from the cast, listedin, directors and country columns that there are several cells that contain multiple values seperated by commas. Below is a process of generating tables out of the columns since the values in the named columns have the same unique ID, using the relational operator CROSS APPLY and the function String_split()
 ```sql
@@ -404,6 +418,8 @@ EXEC sp_rename 'netflixStaging_temp', 'netflixStaging'
 ```
 **Result:** We now have a completely normalized table netflixStaging. We can get any content we want (analyse) about the directors, cast, listedin and country from the tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn, netflixStaging_Cast and netflixStaging using relational operators like join and inner join.
 
+AlTER TABLE netflix
+
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
@@ -419,7 +435,7 @@ GROUP BY
 **Objective:** Determine the distribution of content types on Netflix
 
 ### 2. 	Count the Number of Content Items in Each Genre
-#### Method 1:
+#### Method 1: Using the normalized table netflixStaging
 ```sql
  SELECT 
 	nsl.listedin Genre,
@@ -432,7 +448,7 @@ GROUP BY
 ORDER BY
 	Genre
 ```
-#### Method 2:
+#### Method 2: Here we used the unnormalized table netflixStagingCopy
 ```sql
 SELECT 
 	Trim(Value) AS genre,  
@@ -446,15 +462,15 @@ GROUP BY
 ```
 **Objective:** Count the number of content items in each genre.
 
-### 3.	List All Movies Released in a 2020
+### 3.	List All Movies Released in 2020
 ```sql
 SELECT
 	*
 FROM
-	netflix_titlesCopy
+	netflixStaging
 WHERE
 	Type = 'Movie'
-	AND Release_Year = 2020
+	AND releaseyear = 2020
 ```
 **Objective:** Retrieve all movies released in a specific year.
 
