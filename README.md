@@ -369,12 +369,13 @@ SELECT
 	showid, 
 	TRIM(value) as director
 INTO
-	netflixStaging_Director
+	netflixStaging_Director 
 FROM
 	netflixStaging
 CROSS APPLY string_split(director,',')
 
 ```
+**Result:** Tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn and netflixStaging_Cast are generated.
 
 ## Business Problems and Solutions
   
