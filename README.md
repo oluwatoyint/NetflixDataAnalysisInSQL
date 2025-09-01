@@ -475,6 +475,24 @@ WHERE
 **Objective:** Retrieve all movies released in a specific year.
 
 ### 4.	Find the Top 5 Countries with the Most Content on Netflix
+#### Method 1: Using INNER JOIN with the normalised table netflixStaging
+ SELECT TOP 5 *
+ FROM
+   (
+		SELECT 
+				nsc.country Country,
+				COUNT(*) NumberOfProductions
+		FROM 
+				netflixStaging ns
+		INNER JOIN netflixStaging_Country nsc ON ns.showid=nsc.showid
+		GROUP BY 
+				nsc.country
+		
+	) AS temp
+ORDER BY 
+		NumberOfProductions DESC
+  
+#### Method 2: Using CROSS APPLY and String_Split on unnormalised table netflixStagingCopy
 ```sql
 SELECT Top(5) 
 	* 
@@ -484,7 +502,7 @@ FROM
 		Trim(Value) AS country,  
 		COUNT(*) AS total_content  
 		FROM 
-  			netflix_titles
+  			netflixStaging
 		CROSS APPLY 
   			string_split (country, ',') 
 		GROUP BY 
