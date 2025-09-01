@@ -419,14 +419,28 @@ GROUP BY
 **Objective:** Determine the distribution of content types on Netflix
 
 ### 2. 	Count the Number of Content Items in Each Genre
+#### Method 1:
+```sql
+ SELECT 
+	nsl.listedin Genre,
+	COUNT(*) TotalCount
+FROM 
+	netflixStaging ns
+INNER JOIN netflixStaging_ListedIn nsL ON ns.showid = nsl.showid
+GROUP BY 
+	nsl.listedin
+ORDER BY
+	Genre
+```
+#### Method 2:
 ```sql
 SELECT 
 	Trim(Value) AS genre,  
 	COUNT(*) AS total_content  
 FROM
-	netflixStaging
+	netflixStagingCopy
 CROSS APPLY
-	string_split (listed_in, ',') 
+	string_split (listedin, ',') 
 GROUP BY
 	Trim(Value)
 ```
