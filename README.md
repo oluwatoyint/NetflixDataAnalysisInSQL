@@ -83,7 +83,7 @@ FROM
 	netflixContent
  ```
 **Result:** The result is 8807 records. 
-#### Step 4: We now run the SQL code below to identify the maximum column size for the content in  each of the columns of the netflix_titles table imported. Run the SQL statements below.
+#### Step 5: We now run the SQL code below to identify the maximum column size for the content in  each of the columns of the netflix_titles table imported. Run the SQL statements below.
 
 ```sql
 USE Movies
