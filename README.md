@@ -334,7 +334,7 @@ FROM
 	netflixStaging
 ```
 **Result:** We see that the count is 8801 which implies 6 records with same title and type have been deleted.
-#### Converting the dateadded column to Date datatype. We need to do this to answer some of the questions easier when we start the analysis.
+#### Converting the dateadded column to Date datatype. We need to do this to answer some of the questions easily when we start the analysis.
 ```sql
 ALTER TABLE netflixStaging 
 ADD temp_dateadded DATE NULL 
