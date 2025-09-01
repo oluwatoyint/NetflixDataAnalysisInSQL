@@ -335,7 +335,7 @@ FROM
 ```
 **Result:** We see that the count is 8801 which implies 6 records with same title and type have been deleted.
 
-### Stage 7: Before we start analysing the content of the table. We need to normalize it. We can see from the cast, listedin, directors and country columns that there are several cells that contain multiple values seperated by commas. There is a process of generating tables out of the columns since the values in the columns have the same unique ID
+### Stage 7: Before we start analysing the content of the table. We need to normalize it. We can see from the cast, listedin, directors and country columns that there are several cells that contain multiple values seperated by commas. Below is a process of generating tables out of the columns since the values in the named columns have the same unique ID, using the relational operator CROSS APPLY and the function String_split()
 ```sql
 
 SELECT 
