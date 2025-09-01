@@ -335,6 +335,47 @@ FROM
 ```
 **Result:** We see that the count is 8801 which implies 6 records with same title and type have been deleted.
 
+### Stage 7: Before we start analysing the content of the table. We need to normalize it. We can see from the cast, listedin, directors and country columns that there are several cells that contain multiple values seperated by commas. There is a process of generating tables out of the columns since the values in the columns have the same unique ID
+```sql
+
+SELECT 
+  	showid, 
+	TRIM(value) as cast
+INTO
+	netflixStaging_Cast
+FROM
+	netflixStaging
+CROSS APPLY string_split(cast,',')
+ 
+SELECT 
+	showid, 
+	TRIM(value) as listedin
+INTO
+	netflixStaging_ListedIn
+FROM
+	netflixStaging
+CROSS APPLY string_split(listedin,',')
+ 
+SELECT 
+	showid, 
+	TRIM(value) as country
+INTO
+	netflixStaging_Country
+FROM
+	netflixStaging
+CROSS APPLY string_split(country,',')
+
+SELECT 
+	showid, 
+	TRIM(value) as director
+INTO
+	netflixStaging_Director
+FROM
+	netflixStaging
+CROSS APPLY string_split(director,',')
+
+```
+
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
@@ -343,7 +384,7 @@ SELECT
 	type,
 	COUNT(*) count_type
 FROM 
-	netflix_titles
+	netflixStaging
 GROUP BY 
   	type
 ```
