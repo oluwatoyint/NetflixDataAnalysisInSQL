@@ -395,6 +395,8 @@ EXEC sp_rename 'netflixStaging_temp', 'netflixStaging'
  ALTER TABLE netflixStaging DROP Column cast
  ALTER TABLE netflixStaging DROP Column listed_in
 ```
+**Result:** We now have a completely normalized table netflixStaging. We can get any information/content we want from the directors, cast, listedin and country using relational operators like join, inner join.
+
 ## Business Problems and Solutions
   
 ### 1. Display the total Number of Movies vs TV Shows
