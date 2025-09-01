@@ -224,17 +224,13 @@ WHERE description Is Null
 ```
 **Objective:** To make the table easier to view by identifying and  replacing Null values with 'NA'
 ### Stage 5: We begin to run several SQL queries to check for duplicate records
-```sql
-SELECT DISTINCT [type] FROM netflix_titlesCopy
-```
-**Objective:** Identifying if there is are duplicate types or film
 #### Checking for duplicate show_id
 ```sql
 SELECT 
     Show_id,
 	COUNT(*) duplicate_count
 FROM 
-    netflix_titlesCopy 
+    netflixStaging
 GROUP BY 
 		show_id
 HAVING COUNT(*)>1
@@ -244,18 +240,18 @@ HAVING COUNT(*)>1
 SELECT 
 	*	
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE title IN
 (
 	SELECT 
 		title
 	FROM
-		netflix_titlesCopy
+		netflixStaging
 	GROUP BY
 		title
 	HAVING COUNT(*) > 1
 ) 
-GROUP BY Title
+
 ```
 **Objective:** Identify duplicate titles and view the records. Here we see that there are duplicate titles, but their  types are different. We still need to check whether there are records with same type and same titles.
 
