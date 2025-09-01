@@ -35,7 +35,7 @@ CREATE DATABASE Movies
 **Result:** Movies database that will contain the netflix table created.
 
 #### Step 3: Ensuring that the data is imported without any errors
-To do this we will create table netflixContent and make sure all it's table columns have the datatype of nvarchar(MAX) and we allow null to all the columns except the show_id which will serve as PRIMARY KEY.Please ensure that you take care to put into the statements the correct spelling of the names of all the columns,from step 1.
+To do this we will create table netflixContent and make sure all it's table columns have the datatype of nvarchar(MAX) allow null values. The exceptions will be showid which will not allow nulls and will serve as PRIMARY KEY and the releaseyear which will have the smallint datatype. Please ensure that you take care to put into the statements the correct spelling of the names of all the columns,from step 1.
 
  ```sql
 USE Movies
