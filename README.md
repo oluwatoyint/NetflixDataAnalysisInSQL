@@ -395,7 +395,7 @@ EXEC sp_rename 'netflixStaging_temp', 'netflixStaging'
  ALTER TABLE netflixStaging DROP Column cast
  ALTER TABLE netflixStaging DROP Column listed_in
 ```
-**Result:** We now have a completely normalized table netflixStaging. We can get any information/content we want from the directors, cast, listedin and country using relational operators like join, inner join.
+**Result:** We now have a completely normalized table netflixStaging. We can get any content we want (analyse) about the directors, cast, listedin and country from the tables netflixStaging_Director, netflixStaging_Country, netflixStaging_ListedIn, netflixStaging_Cast and netflixStaging using relational operators like join and inner join.
 
 ## Business Problems and Solutions
   
