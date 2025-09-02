@@ -609,12 +609,32 @@ FROM
 **Objective:** Identify How Many Movies Actor 'Salman Khan' featured in the Last 10 Years
 
 ### 9.	Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
+**Method 1:** Using a normalized table 
+```sql
+SELECT TOP 10
+	nsc.cast Actor,
+	nsco.country Country,
+	COUNT(*) MoviesFeaturedIn
+FROM 
+	netflixStaging ns
+INNER JOIN netflixStaging_Cast nsc ON ns.showid=nsc.showid
+INNER JOIN netflixStaging_Country nsco ON ns.showid=nsco.showid
+WHERE 
+	ns.type='Movie' 
+	AND nsco.country='India' 
+	AND nsc.cast <> 'NA'
+GROUP BY 
+	nsc.cast, nsco.country
+ORDER BY
+	MoviesFeaturedIn DESC
+```
+**Method 2:**  Using a unnormalized table netflixStagingCopy 
 ```sql
 SELECT TOP(10)
 	Trim(Value) AS Actor,
 	COUNT(*) HighestNumber
 FROM 
-	netflix_titles
+	netflixStagingCopy
 CROSS APPLY 
 	STRING_SPLIT(cast,',')
 WHERE 
