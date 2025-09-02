@@ -552,7 +552,7 @@ WHERE Type='Movie' AND listedin LIKE '%Documentaries%'
 **Objective:** Identify the movies that are documentaries
 
 ### 7. Find All Content Without a Director. Note In Director column Null was replaced with NA
-#### Method 1: On the normalised table netflixStaging
+#### Method 1: On the normalized table netflixStaging
 ```sql
 SELECT 
 	ns.*,
@@ -564,7 +564,7 @@ INNER JOIN
 WHERE
 	nsd.director='NA'
 ```
-#### Method 2: On unnormalised table netflixStagingCopy
+#### Method 2: On unnormalized table netflixStagingCopy
 ```sql
 SELECT
 	*
@@ -581,29 +581,31 @@ WHERE
 **Objective:** Identify the content without Director(s)
 
 ### 8.	Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
-#### Method 1:
+#### Method 1: For normalized table netflixStaging
+ ```sql
+	SELECT 
+		ns.*,
+		nsc.cast
+	FROM
+		netflixStaging ns
+	INNER JOIN netflixStaging_Cast nsc ON ns.showid=nsc.showid
+	WHERE 
+		nsc.cast='Salman Khan'
+		AND ns.type='Movie'
+		AND releaseyear >= YEAR(GETDATE())-10
+```
+#### Method 2: For unnormalized table netflixStagingCopy
 ```sql
  SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStagingCopy
  WHERE 
 	Type='Movie' 
 	AND cast LIKE '%Salman Khan%' 
-	AND release_year > YEAR(GetDate()) - 10
+	AND releaseyear > YEAR(GetDate()) - 10
 ```
-#### Method 2: For normalized Cast table
- ```sql
-SELECT 
-	ntc.*, 
-	nc.cast 
-FROM 
-	netflix_titlesCopy ntc
-JOIN 
-	netflix_cast nc ON ntc.show_id = nc.show_id
-WHERE nc.cast= 'Salman Khan' 
-AND  ntc.release_year > YEAR(GetDate()) - 10
-```
+
 **Objective:** Identify How Many Movies Actor 'Salman Khan' featured in the Last 10 Years
 
 ### 9.	Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
