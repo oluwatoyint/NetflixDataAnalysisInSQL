@@ -694,7 +694,7 @@ ORDER BY
 
 ### 12.	Find All Movies/TV Shows by Director 'Rajiv Chilaka'
 #### Method 1: Using JOIN to connect the normalised netflixStaging table with the netflixStaging_director table 
-
+```sql
 SELECT
 	ns.*,
 	nsd.director
