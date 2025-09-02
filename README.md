@@ -521,7 +521,7 @@ ORDER BY
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
 	date_added >= DATEADD(Year, -5, GetDate())
 ```
@@ -531,49 +531,53 @@ WHERE
 #### Method 1:
 ```sql
 SELECT
-	* 
+	nsl.listedin As Genre,
+	COUNT(*) TotalNumberOfProductions
 FROM 
-	netflix_titlesCopy
+	netflixStaging ns
+INNER JOIN netflixStaging_ListedIn nsl ON ns.showid=nsl.showid
 WHERE 
-	Type='Movie' AND 
-	Listed_in LIKE '%Documentaries%'
+	type='Movie' 
+	AND nsl.listedin='documentaries'
+GROUP BY 
+	nsl.listedin
 ```
 
 #### Method 2: Using the normalized tables
 ```sql
-SELECT 
-	ntc.*, 
-	nli.listed_in 
-FROM 
-	netflix_titlesCopy ntc
-JOIN 
-	netflix_listed_in nli ON ntc.show_id = nli.show_id
-WHERE 
-	nli.Listed_in = 'Documentaries'
+SELECT * FROM netflixStagingCopy
+WHERE Type='Movie' AND listedin LIKE '%Documentaries%'
+
 ```
 **Objective:** Identify the movies that are documentaries
 
 ### 7. Find All Content Without a Director. Note In Director column Null was replaced with NA
-#### Method 1:
+#### Method 1: On the normalised table netflixStaging
 ```sql
 SELECT 
-	* 
-FROM 
-	netflix_titlesCopy
-WHERE director ='NA'
+	ns.*,
+ 	nsd.director
+FROM
+	netflixStaging ns
+INNER JOIN
+	netflixStaging_Director nsd ON ns.showid=nsd.showid
+WHERE
+	nsd.director='NA'
 ```
-#### Method 2:
+#### Method 2: On unnormalised table netflixStagingCopy
 ```sql
-SELECT 
-	ntc.*, 
-	nd.director 
-FROM 
-	netflix_titlesCopy ntc
-JOIN 
-	netflix_director nd ON ntc.show_id = nd.show_id
-WHERE 
-	nd.director = 'NA'
+SELECT
+	*
+FROM
+	netflixStagingCopy
+WHERE
+	director ='NA'
 ```
+
+
+
+
+
 **Objective:** Identify the content without Director(s)
 
 ### 8.	Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
