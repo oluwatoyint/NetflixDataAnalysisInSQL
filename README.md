@@ -476,6 +476,7 @@ WHERE
 
 ### 4.	Find the Top 5 Countries with the Most Content on Netflix
 #### Method 1: Using INNER JOIN with the normalised table netflixStaging
+```sql
  SELECT TOP 5 *
  FROM
    (
@@ -491,7 +492,7 @@ WHERE
 	) AS temp
 ORDER BY 
 		NumberOfProductions DESC
-  
+ ``` 
 #### Method 2: Using CROSS APPLY and String_Split on unnormalised table netflixStagingCopy
 ```sql
 SELECT Top(5) 
