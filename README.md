@@ -650,6 +650,7 @@ Order BY
 ### 10.	Categorize the content based on the presence of the keyword 'kill' and 'violence' in the description field. Label content containing these keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
  
 ```sql 
+
 SELECT 
 	Category,
 	Count(*) As CountContent
@@ -661,10 +662,11 @@ FROM
 			ELSE
 				'Good'
 			END AS Category 
-		FROM netflix_titlesCopy
+		FROM netflixStaging
 	) AS Categorised_Content
 	Group BY 
-		Category     
+		Category
+    
 ```
 
 **Objectives:** Identify productions that contain the words 'kill' and 'violence' and label them as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
