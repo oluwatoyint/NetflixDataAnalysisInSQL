@@ -728,12 +728,26 @@ WHERE
 **Objective:** To Identify All Movies/TV Shows directed by Director 'Rajiv Chilaka'
 
 ### 13.	List All TV Shows with More Than 5 Seasons
+#### Method 1:
+```sql
+ SELECT 
+	*
+  FROM 
+	netflixStaging 
+ WHERE 
+	CAST(LEFT(duration,CHARINDEX(' ',duration)-1) AS int) > 5 
+	AND duration LIKE '%Season%'
+	AND type = 'TV Show'
+ ORDER BY 
+	CAST(LEFT(duration,CHARINDEX(' ',duration)-1) AS int) DESC
+```
+#### Method 2: Using CROSS APPLY and string_split on unnormalized table netflixStatingCopy
 ```sql
 SELECT
 	Title,
 	TRIM(Value) Season
 FROM
-	netflix_titlesCopy
+	netflixStagingCopy
 CROSS APPLY 
 	string_split(duration,' ',1)
 WHERE 
@@ -747,25 +761,27 @@ Order By
 
 ### 14.	List content items added after August 20, 2021
 #### Method 1:
+
 ```sql
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
-	CAST(date_added as Date) > '2021-08-20'
+	dateadded > '2021-08-20'
+
 ```
 **Explanation:**
-- We do not need to do the above if the values in the date column were previously converted to the Date datatype
-- Use method 2 below if the date column values have already been formatted with the Date datatype
+- We can use method 1 above because remember just before **Stage 7** in the data cleaning process we converted the dateadded column to the Date datatype. 
+- Use method 2 below if the dateadded column values have not been formatted with the Date datatype
 #### Method 2:
 ```sql
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
-	date_added > '2021-08-20'
+	CAST(date_added as Date) >  '2021-08-20'
 ```
 **Objective:** To Identify and list content items added after the date August 20, 2021
 ### 15.	List movies added to on June 15, 2019
