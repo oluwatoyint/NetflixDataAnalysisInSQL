@@ -692,49 +692,38 @@ ORDER BY
 **Objective:** To Identify record with the longest movie duration.
 
 ### 12.	Find All Movies/TV Shows by Director 'Rajiv Chilaka'
-#### Solution Stage 1: The first thing we need to do is to normalize the table netflix_TitlesCopy and create Director Table 
-```sql
-SELECT 
-	show_id, 
-	TRIM(value) as director
-INTO 
-	netflix_director
+#### Method 1: Using JOIN to connect the normalised netflixStaging table with the netflixStaging_director table 
+
+SELECT
+	ns.*,
+	nsd.director
 FROM 
-	netflix_titlesCopy
-CROSS APPLY 
-	string_split(director,',')
+	netflixStaging ns
+INNER JOIN 
+	netflixStaging_Director nsd ON ns.showid=nsd.showid
+WHERE 
+	nsd.director = 'Rajiv Chilaka'
 ```
-#### Method 1: Using LIKE on the unnormalized table and IN
+#### Method 2: Using LIKE on the unnormalized table and IN
 ```sql
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStagingCopy
 WHERE 
-	Type IN ('Movie', 'TV Show') 
+	type IN ('Movie', 'TV Show') 
 	AND Director LIKE '%Rajiv Chilaka%'
 ```
-#### Method 2:
+#### Method 3:
 ```sql
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStagingCopy
 WHERE 
 	Director LIKE '%Rajiv Chilaka%'
 ```
-#### Method 3: Using JOIN to connect the netflix_titlesCopy table with the netflix_director table obtained by using CROSS APPLY and string_split function
-```sql
-SELECT 
-	ntf.*, 
-	nd.director 
-FROM 
-	netflix_titlesCopy ntf
-JOIN 
-	netflix_director nd ON ntf.show_id = nd.show_id
-WHERE 
-	nd.Director = 'Rajiv Chilaka'
-```
+
 **Objective:** To Identify All Movies/TV Shows directed by Director 'Rajiv Chilaka'
 
 ### 13.	List All TV Shows with More Than 5 Seasons
