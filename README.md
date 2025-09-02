@@ -672,28 +672,22 @@ FROM
 **Objectives:** Identify productions that contain the words 'kill' and 'violence' and label them as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
 
 ### 11.	Identify the Longest Movie
-#### Example: This example is to illustrate what 'value' signifies when using string_split
+
 ```sql
-SELECT 
-	value from string_split('113 min',' ')
-```
-**Result:** The content of value is 113 since the delimiter here is space.
-#### Solution to Question 11:
-```sql
-SELECT TOP (1)
+
+SELECT TOP 1
     Type,
     Title,
-    value AS TotalMinute,
-    duration
+    CAST(LEFT(duration, CHARINDEX(' ', duration) - 1) AS INT) AS TotalMinutes
 FROM 
-    netflix_titlesCopy
-CROSS APPLY 
-    STRING_SPLIT(duration, ' ', 1)
+    netflixStaging
 WHERE 
-    type = 'Movie' 
-    AND ordinal = 1
+    type = 'Movie'
+    AND duration LIKE '% min'
+    AND ISNUMERIC(LEFT(duration, CHARINDEX(' ', duration) - 1)) = 1
 ORDER BY 
-    CAST(TRIM(value) AS INT) DESC
+    CAST(LEFT(duration, CHARINDEX(' ', duration) - 1) AS INT) DESC;
+
 ```
 **Objective:** To Identify record with the longest movie duration.
 
