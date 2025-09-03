@@ -786,12 +786,13 @@ WHERE
 **Objective:** To Identify and list content items added after the date August 20, 2021
 ### 15.	List movies added to on June 15, 2019
 ```sql
-SELECT 
-	* 
-FROM 
-	netflix_titlesCopy
-WHERE 
-	date_added = '2019-06-15' AND type='Movie'
+SELECT
+	*
+FROM
+	netflixStaging
+WHERE
+	dateadded = '2019-06-15'
+	AND type='Movie'
 ```
 **Objective:** To Identify and list movies added on June 15, 2019
 ### 16.	List content items added in 2021
@@ -800,19 +801,19 @@ WHERE
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
-	date_added >= '2021-01-01' 
-	AND date_added <= '2021-12-31'
+	dateadded >= '2021-01-01' 
+	AND dateadded <= '2021-12-31'
 ``` 
  #### Method 2:
  ```sql
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
-	date_added BETWEEN '2021-01-01' 
+	dateadded BETWEEN '2021-01-01' 
 	AND '2021-12-31'
 ```  
 #### Method 3:
@@ -820,59 +821,59 @@ WHERE
 Select 
 	*  
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
-	date_added LIKE '%2021%'
+	dateadded LIKE '%2021%'
 ```
 #### Method 4:
 ```sql
 SELECT 
 	*
 FROM
-	netflix_titlesCopy where Year(date_added) = 2021
+	netflixStaging where Year(dateadded) = 2021
 ```
 **Objective:** To Identify content added in 2021
 ### 17.	List movies added in 2021
 #### Method 1:
 ```sql
-SELECT 
-	* 
-FROM 
-	netflix_titlesCopy
-WHERE 
-	type = 'Movie' 
-	AND date_added >= '2021-01-01' 
-	AND date_added <= '2021-12-31'
-  ```
+SELECT
+	*
+FROM
+	netflixStaging
+WHERE
+	dateadded BETWEEN '2021-01-01' 
+	AND '2021-12-31'
+	AND type='Movie'
+```
 #### Method 2:
+```sql
+SELECT
+	*
+FROM
+	netflixStaging
+WHERE
+	YEAR(dateadded) = 2021 
+	AND type='Movie'
+```
+#### Method 3:
 ```sql
 SELECT 
 	* 
 FROM 
-	netflix_titlesCopy
+	netflixStaging
 WHERE 
-	type = 'Movie' 
-	AND  date_added BETWEEN '2021-01-01' 
-	AND '2021-12-31'
-```
-#### Method 3:
-  ```sql
-SELECT 
-	*  
- FROM 
-	netflix_titlesCopy
- WHERE 
-	type = 'Movie' 
-	AND date_added LIKE '%2021%'
+	dateadded >= '2021-01-01' 
+	AND dateadded <= '2021-12-31'
+	AND type='Movie'
 ```
 #### Method 4:
 ```sql
-SELECT 
-	*
+Select 
+	*  
 FROM 
-	netflix_titlesCopy 
+	netflixStaging
 WHERE 
-	Year(date_added) = 2021 
+	dateadded LIKE '%2021%'
 	AND type='Movie'
- ```
+```
 **Objective:** To Identify and list movies added in 2021
