@@ -877,3 +877,22 @@ WHERE
 	AND type='Movie'
 ```
 **Objective:** To Identify and list movies added in 2021
+
+### 18.	Count the number of movies and tv series that each director has produced in different columns.
+```sql
+SELECT 
+    nsd.director Director,
+    SUM(CASE WHEN ns.type = 'Movie' THEN 1 ELSE 0 END) as Movie_Count,
+    SUM(CASE WHEN ns.type = 'TV Show' THEN 1 ELSE 0 END) as TV_Series_Count
+FROM 
+	netflixStaging_Director nsd
+LEFT JOIN
+	netflixStaging ns ON nsd.showid = ns.showid
+WHERE 
+	nsd.director IS NOT NULL
+GROUP BY 
+	Director
+ORDER BY 
+	nsd.director 
+```
+**Objective:** To Identify the number of movies and tv series that each director has produced in different columns.
